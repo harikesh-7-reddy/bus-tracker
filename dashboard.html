@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Bus Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- app.js MUST be loaded as module -->
+<script type="module" src="app.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <h2>🚌 College Bus Tracker</h2>
+
+        <div class="card">
+            <h3>User Role</h3>
+            <div class="info">
+                Status:
+                <span id="roleStatus">Loading...</span>
+            </div>
+        </div>
+
+        <div class="card">
+
+            <h3>Live Statistics</h3>
+
+            <div class="info">
+                Distance:
+                <span id="distance">0.00</span> km
+            </div>
+
+            <div class="info">
+                Speed:
+                <span id="speed">0</span> km/h
+            </div>
+
+            <div class="info">
+                Stops:
+                <span id="stopCount">0</span>
+            </div>
+
+            <div class="info">
+                Duration:
+                <span id="duration">0</span> min
+            </div>
+
+            <button id="startBtn" class="btn start-btn">
+                Start Tracking
+            </button>
+
+            <button id="stopBtn" class="btn stop-btn">
+                Stop Tracking
+            </button>
+
+        </div>
+
+        <div class="card">
+            <h3>Detected Stops</h3>
+            <div id="stopList"></div>
+        </div>
+
+        <div class="card">
+            <h3>Trip History</h3>
+            <div id="tripHistory"></div>
+        </div>
+
+        <button
+            class="btn logout-btn"
+            onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <div id="map"></div>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("loggedIn") !== "true"){
+    location.href = "index.html";
+}
+
+function logout(){
+    localStorage.removeItem("loggedIn");
+    location.href = "index.html";
+}
+
+</script>
+
+<!-- Google Maps -->
+<script type="module" src="app.js"></script>
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoUGDoo6oHqdWIiZCVrqjJlBnPm-MSyCk&libraries=places&callback=initMap"
+async
+defer>
+</script>
+
+</body>
+</html>

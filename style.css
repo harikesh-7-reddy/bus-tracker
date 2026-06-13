@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* DASHBOARD */
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+.sidebar{
+    width:340px;
+    background:#111827;
+    color:white;
+    overflow-y:auto;
+    padding:15px;
+}
+
+.sidebar h2{
+    margin-bottom:15px;
+}
+
+.card{
+    background:#1f2937;
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.info{
+    margin:8px 0;
+    font-size:15px;
+}
+
+.role-driver{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.role-viewer{
+    color:#f59e0b;
+    font-weight:bold;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    margin-top:8px;
+}
+
+.start-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.stop-btn{
+    background:#dc2626;
+    color:white;
+}
+
+.logout-btn{
+    background:#2563eb;
+    color:white;
+}
+
+#map{
+    flex:1;
+    height:100vh;
+}
+
+/* STOPS */
+
+.stop-item{
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:8px;
+    color:white;
+}
+
+.stop-short{
+    background:#eab308;
+}
+
+.stop-medium{
+    background:#f97316;
+}
+
+.stop-long{
+    background:#dc2626;
+}
+
+/* HISTORY */
+
+.trip-card{
+    background:#374151;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:8px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        height:40vh;
+    }
+
+    #map{
+        width:100%;
+        height:60vh;
+    }
+
+}
