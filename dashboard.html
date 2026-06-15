@@ -97,13 +97,17 @@ function logout(){
 </script>
 
 <!-- Google Maps -->
-<script type="module" src="app.js"></script>
 
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoUGDoo6oHqdWIiZCVrqjJlBnPm-MSyCk&libraries=places&callback=initMap"
-async
-defer>
+
+<script>
+window.initMap = () => {};
 </script>
+
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoUGDoo6oHqdWIiZCVrqjJlBnPm-MSyCk&libraries=places">
+</script>
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
