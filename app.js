@@ -59,7 +59,7 @@ const tripHistory =
 
 /* ---------------- MAP ---------------- */
 
-window.initMap = async function(){
+async function initMap() {
 
     console.log("MAP LOADED");
 
@@ -128,68 +128,55 @@ window.initMap = async function(){
 
 /* ---------------- DRIVER / VIEWER ---------------- */
 
+
 async function assignRole(){
 
-    const driverRef =
-        ref(
-            db,
-            "activeDriver"
-        );
+    const driverRef = ref(db,"activeDriver");
 
-    const snapshot =
-        await get(driverRef);
+    try{
 
-    const activeDriver =
-        snapshot.val();
+        const snapshot = await get(driverRef);
+        const activeDriver = snapshot.val();
 
-    if(
-        !activeDriver ||
-        activeDriver === ""
-    ){
+        if(!activeDriver){
 
-        await set(
-            driverRef,
-            sessionId
-        );
-
-        isDriver = true;
-
-        roleStatus.innerHTML =
-            '<span class="role-driver">Driver</span>';
-
-    }else{
-
-        if(
-            activeDriver ===
-            sessionId
-        ){
+            await set(driverRef, sessionId);
 
             isDriver = true;
 
             roleStatus.innerHTML =
                 '<span class="role-driver">Driver</span>';
 
-        }else{
+            return;
+        }
 
-            isDriver = false;
+        if(activeDriver === sessionId){
+
+            isDriver = true;
 
             roleStatus.innerHTML =
-                '<span class="role-viewer">Viewer</span>';
+                '<span class="role-driver">Driver</span>';
 
-            startBtn.disabled =
-                true;
-
-            stopBtn.disabled =
-                true;
+            return;
         }
-    }
 
-    console.log(
-        "ROLE:",
-        isDriver
-        ? "DRIVER"
-        : "VIEWER"
-    );
+        isDriver = false;
+
+        roleStatus.innerHTML =
+            '<span class="role-viewer">Viewer</span>';
+
+        startBtn.disabled = true;
+        stopBtn.disabled = true;
+
+    }catch(err){
+
+        console.error(err);
+
+        isDriver = true;
+
+        roleStatus.innerHTML =
+            '<span class="role-driver">Driver</span>';
+    }
 }
 
 /* ---------------- LIVE LOCATION ---------------- */
@@ -968,4 +955,8 @@ async function saveTrip(){
         tripData
     );
 }
+window.initMap = initMap;
 
+if (typeof google !== "undefined" && google.maps) {
+    initMap();
+}
