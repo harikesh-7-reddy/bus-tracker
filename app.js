@@ -102,6 +102,28 @@ window.initMap = async function(){
     listenLiveLocation();
 
     loadTripHistory();
+
+    onValue(
+        ref(db, "currentTrip/route"),
+        snapshot => {
+
+            if (isDriver) return;
+
+            const data = snapshot.val();
+
+            if (!data || !routeLine) return;
+
+            const points = Array.isArray(data)
+                ? data
+                : Object.values(data);
+
+            routeLine.setPath(points);
+
+            if (points.length > 0) {
+                map.panTo(points[points.length - 1]);
+            }
+        }
+    );
 };
 
 /* ---------------- DRIVER / VIEWER ---------------- */
@@ -633,35 +655,6 @@ function createStop(
         div
     );
 }
-
-/* ---------------- VIEW CURRENT ROUTE ---------------- */
-
-onValue(
-
-    ref(
-        db,
-        "currentTrip/route"
-    ),
-
-    snapshot=>{
-
-        if(isDriver)
-            return;
-
-        const data =
-            snapshot.val();
-
-        if(!data)
-            return;
-
-        const points =
-            Object.values(data);
-
-        routeLine.setPath(
-            points
-        );
-    }
-);
 
 /* ---------------- SHOW OLD TRIP ---------------- */
 
